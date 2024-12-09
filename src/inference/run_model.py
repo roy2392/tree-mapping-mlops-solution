@@ -5,7 +5,7 @@ import numpy as np
 import detectree as dtr
 
 MODEL_PATH = "src/model/tree_model_new"  # Adjust as needed
-PATCH_DIR = "../data/intermediate/patches"
+PATCH_DIR = "src/data/intermediate/patches"
 OUTPUT_DIR = "src/data/processed"
 
 def load_model(model_path):

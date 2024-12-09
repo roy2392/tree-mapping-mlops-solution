@@ -16,4 +16,4 @@ def split_image_into_patches(image_path, output_dir, patch_size=800):
     print(f"Split {image_path} into {count} patches.")
 
 if __name__ == "__main__":
-    split_image_into_patches("../data/intermediate/example.png", "../data/intermediate/patches")
+    split_image_into_patches("src/data/intermediate/example.png", "src/data/intermediate/patches")
