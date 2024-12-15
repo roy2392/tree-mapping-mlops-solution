@@ -1,0 +1,19 @@
+# Use a lightweight Python base
+FROM python:3.9-slim
+
+# Set a working directory
+WORKDIR /app
+
+# Install common OS dependencies if needed
+RUN apt-get update && apt-get install -y \
+    libgdal-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy and install shared requirements (e.g., a common requirements.txt)
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set up environment variables
+ENV PYTHONUNBUFFERED=1
+
+# This base image can then be used for other Dockerfiles (FROM base as <build>)

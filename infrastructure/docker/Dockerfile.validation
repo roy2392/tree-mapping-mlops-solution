@@ -1,0 +1,12 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy validation logic
+COPY src/validation/ ./validation/
+COPY src/utils/ ./utils/
+
+CMD ["python", "-m", "validation.jaccard_similarity"]

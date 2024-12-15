@@ -1,0 +1,31 @@
+name: BuildAndPushDocker
+on: [push]
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/githubActionsRole
+          aws-region: us-east-1
+
+      - name: Login to ECR
+        run: |
+          aws ecr get-login-password --region us-east-1 \
+          | docker login --username AWS --password-stdin <your_account_id>.dkr.ecr.us-east-1.amazonaws.com
+
+      - name: Build Docker Images
+        run: |
+          docker build -t my-preprocess:latest -f infrastructure/docker/Dockerfile.preprocess .
+          docker build -t my-modelserve:latest -f infrastructure/docker/Dockerfile.modelserve .
+          # etc.
+
+      - name: Push to ECR
+        run: |
+          docker tag my-preprocess:latest <your_account_id>.dkr.ecr.us-east-1.amazonaws.com/my-preprocess:latest
+          docker push <your_account_id>.dkr.ecr.us-east-1.amazonaws.com/my-preprocess:latest
+          # Repeat for other images

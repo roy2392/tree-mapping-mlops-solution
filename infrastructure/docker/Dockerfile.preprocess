@@ -1,0 +1,21 @@
+# If you have a base image:
+# FROM <your_repo>/base-images:latest
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Install OS dependencies if needed (GDAL, etc.)
+RUN apt-get update && apt-get install -y \
+    libgdal-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy in your requirements
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the preprocessing scripts
+COPY src/preprocessing/ ./preprocessing/
+COPY src/utils/ ./utils/
+
+# (Optional) Copy an entrypoint script, or just define a CMD
+CMD ["python", "-m", "preprocessing.convert_tif_to_png"]
