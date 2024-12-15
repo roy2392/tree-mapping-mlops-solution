@@ -1,7 +1,7 @@
 resource "aws_ecr_repository" "preprocess" {
   name = "my-preprocess"
 }
-resource "aws_ecr_repository" "modelserve" {
-  name = "my-modelserve"
+
+output "preprocess_repo_url" {
+  value = aws_ecr_repository.preprocess.repository_url
 }
-// etc.
