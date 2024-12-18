@@ -13,18 +13,18 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          aws-region: us-east-1
 
       - name: Login to ECR
         run: |
-          aws ecr get-login-password --region ${{ secrets.AWS_DEFAULT_REGION }} \
-            | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com
+          aws ecr get-login-password --region us-east-1 \
+            | docker login --username AWS --password-stdin 851725297881.dkr.ecr.us-east-1.amazonaws.com
 
       - name: Build image
         run: |
-          docker build -t my-app:latest -f infrastructure/docker/Dockerfile.preprocess .
+          docker build -t my-preprocess:latest -f infrastructure/docker/Dockerfile.preprocess .
 
       - name: Push image
         run: |
-          docker tag my-preprocess 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess
-          docker push 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess
+          docker tag my-preprocess:latest 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess:latest
+          docker push 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess:latest
