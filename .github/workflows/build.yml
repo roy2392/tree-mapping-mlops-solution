@@ -26,5 +26,5 @@ jobs:
 
       - name: Push image
         run: |
-          docker tag my-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/my-app:latest
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/my-app:latest
+          docker tag my-preprocess:latest 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess:latest
+          docker push 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess:latest

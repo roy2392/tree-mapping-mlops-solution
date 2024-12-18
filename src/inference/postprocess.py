@@ -14,5 +14,5 @@ def aggregate_detections(detections_dir):
     return all_detections
 
 if __name__ == "__main__":
-    aggregated = aggregate_detections("../data/processed")
+    aggregated = aggregate_detections("src/data/processed")
     # Further processing of aggregated detections
