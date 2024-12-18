@@ -19,8 +19,6 @@ jobs:
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_REGISTRY_TOKEN }}
 
       - name: Terraform Init & Plan
         run: |
