@@ -21,12 +21,13 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init & Plan
+        working-directory: infrastructure/terraform
         run: |
-          cd infrastructure/terraform
           terraform init
           terraform plan
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
+        working-directory: infrastructure/terraform
         run: |
           terraform apply -auto-approve
