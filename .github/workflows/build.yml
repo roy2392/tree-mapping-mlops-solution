@@ -26,5 +26,5 @@ jobs:
 
       - name: Push image
         run: |
-          docker tag my-preprocess:latest 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess:latest
-          docker push 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess:latest
+          docker tag my-preprocess:latest 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess
+          docker push 851725297881.dkr.ecr.us-east-1.amazonaws.com/my-preprocess
