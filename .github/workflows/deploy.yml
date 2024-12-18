@@ -6,6 +6,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -13,13 +16,11 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::123456789012:role/githubActionsRole
+          role-to-assume: arn:aws:iam::851725297881:role/githubActionsRole
           aws-region: us-east-1
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_REGISTRY_TOKEN }}
 
       - name: Terraform Init & Plan
         run: |
